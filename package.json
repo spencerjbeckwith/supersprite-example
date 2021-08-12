@@ -1,0 +1,15 @@
+{
+  "name": "supersprite-example",
+  "version": "1.0.0",
+  "description": "Example usage of supersprite",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "author": "Spencer Beckwith",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "rollup": "^2.56.2"
+  }
+}

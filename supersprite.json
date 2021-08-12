@@ -1,0 +1,14 @@
+{
+    "dir": "./sprites",
+    "outputImage": "./build/atlas.png",
+    "outputJS": "./src/atlas.js",
+    "atlasWidth": 512,
+    "atlasHeight": 512,
+    "separationW": 32,
+    "separationH": 32,
+    "transparent": {
+        "red": 0,
+        "green": 0,
+        "blue": 0
+    }
+}
