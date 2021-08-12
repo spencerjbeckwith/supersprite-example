@@ -724,7 +724,7 @@ function main() {
     draw.text(200,32,'supersprite example',textOptions);
 
     draw.spriteSpeed(spr.mario,0.2,140,80);
-    draw.spriteSpeed(spr.mario,0.2,260,80,mat => mat.scale(-1,1));
+    draw.spriteSpeed(spr.mario,0.2,260,80,m => m.scale(-1,1));
 
     let newScale = (Math.sin(n))+1.15;
     draw.sprite(spr.bowser,0,186,90,m => m.translate(0.5,0.5).rotate(n).scale(newScale,newScale).translate(-0.5,-0.5));
