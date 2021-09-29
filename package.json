@@ -1,6 +1,6 @@
 {
   "name": "supersprite-example",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Example usage of supersprite",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,6 @@
     "rollup": "^2.56.2"
   },
   "dependencies": {
-    "supersprite": "^1.0.1"
+    "supersprite": "^2.0.2"
   }
 }

@@ -1,4 +1,4 @@
-import { Color, draw, initialize, Shader } from 'supersprite';
+import { init, supersprite, draw, Color } from 'supersprite';
 import spr from './atlas.js';
 
 const gameObjects = [];
@@ -11,7 +11,7 @@ const textOptions = {
 let n = 0;
 
 function main() {
-    Shader.beginRender();
+    supersprite.beginRender();
 
     gameObjects.forEach(ball => ball.step());
 
@@ -28,29 +28,42 @@ function main() {
         n -= Math.PI*2;
     }
 
-    Shader.render();
+    supersprite.endRender();
     requestAnimationFrame(main);
 }
 
-initialize({
-    mainLoop: main,
-    atlasURL: 'atlas.png',
+init({
     responsive: 'scale',
     maintainAspectRatio: true,
     scalePerfectly: true,
-    viewWidth: 400,
-    viewHeight: 240,
-    backgroundColor: {
+    contextImageSmoothing: false,
+    glOptions: {
+        antialias: true,
+    },
+    gameTextureParameters: {
+        textureMagFilter: 'nearest',
+        textureMinFilter: 'nearest',
+    }
+});
+
+supersprite.loadTexture('atlas.png',{
+    textureMagFilter: 'nearest',
+    textureMinFilter: 'nearest',
+}).then((obj) => {
+    supersprite.setAtlas(obj);
+    supersprite.background = {
         red: 0.1,
         green: 0.05,
         blue: 0.05,
     }
+    main();
 });
 
+// Game stuff
 class Ball {
     constructor(x,y) {
-        this.x = Math.random()*Shader.viewWidth;
-        this.y = 100+Math.random()*(Shader.viewHeight/2);
+        this.x = Math.random()*supersprite.viewWidth;
+        this.y = 100+Math.random()*(supersprite.viewHeight/2);
         this.hspeed = (Math.random()*4)-2;
         this.vspeed = (Math.random()*4)-2;
         this.radius = Math.round((Math.random()*10)+10);
@@ -63,18 +76,18 @@ class Ball {
         if (this.x-this.radius < 0) {
             this.x = this.radius+1;
             this.hspeed = -this.hspeed;
-        } else if (this.x+this.radius > Shader.viewWidth) {
-            this.x = Shader.viewWidth-this.radius-1;
+        } else if (this.x+this.radius > supersprite.viewWidth) {
+            this.x = supersprite.viewWidth-this.radius-1;
             this.hspeed = -this.hspeed;
         } else {
             this.x += this.hspeed;
         }
 
-        if (this.y-this.radius < Shader.viewHeight/2) {
-            this.y = (Shader.viewHeight/2)+this.radius+1;
+        if (this.y-this.radius < supersprite.viewHeight/2) {
+            this.y = (supersprite.viewHeight/2)+this.radius+1;
             this.vspeed = -this.vspeed;
-        } else if (this.y+this.radius > Shader.viewHeight) {
-            this.y = Shader.viewHeight-this.radius-1;
+        } else if (this.y+this.radius > supersprite.viewHeight) {
+            this.y = supersprite.viewHeight-this.radius-1;
             this.vspeed = -this.vspeed;
         } else {
             this.y += this.vspeed;
